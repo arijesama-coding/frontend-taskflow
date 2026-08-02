@@ -1,0 +1,69 @@
+.task-board-page {
+  padding: var(--spacing-lg);
+  height: calc(100vh - 100px);
+
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    height: calc(100% - 100px);
+    margin-top: var(--spacing-lg);
+    overflow-x: auto;
+  }
+
+  .kanban-column {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    min-width: 300px;
+
+    &.todo { border-top: 3px solid #757575; }
+    &.in-progress { border-top: 3px solid #1565c0; }
+    &.review { border-top: 3px solid #f57c00; }
+    &.done { border-top: 3px solid #2e7d32; }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid var(--border-color);
+
+      .column-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+
+        .task-count {
+          background: var(--bg-primary);
+          color: var(--text-secondary);
+          padding: 2px 8px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .task-list {
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+
+      &.cdk-drop-list-dragging {
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: var(--border-radius);
+      }
+    }
+
+    .empty-column {
+      padding: var(--spacing-xl);
+      text-align: center;
+      color: var(--text-disabled);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--border-radius);
+    }
+  }
+}

@@ -1,0 +1,47 @@
+
+<mat-card
+  class="task-card"
+  [ngClass]="priorityClass"
+  (click)="onClick.emit(task)"
+  cdkDrag>
+
+  <div class="card-header">
+    <app-priority-badge [priority]="task.priority"></app-priority-badge>
+    <div class="card-actions">
+      <button mat-icon-button (click)="$event.stopPropagation(); onEdit.emit(task)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="$event.stopPropagation(); onDelete.emit(task)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-card-content>
+    <h4 class="task-title">{{ task.title }}</h4>
+    <p class="task-description" *ngIf="task.description">
+      {{ task.description | slice:0:100 }}{{ task.description.length > 100 ? '...' : '' }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <div class="footer-content">
+      <div class="task-meta">
+            <span *ngIf="task.deadline" class="deadline"
+                  [ngClass]="{'overdue': isOverdue(task.deadline)}">
+              <mat-icon>calendar_today</mat-icon>
+              {{ task.deadline | date:'MMM d' }}
+            </span>
+
+        <span *ngIf="task.assignedUser" class="assignee">
+              <mat-icon>person</mat-icon>
+          {{ task.assignedUser.username }}
+            </span>
+      </div>
+
+      <mat-chip class="drag-handle">
+        <mat-icon>drag_indicator</mat-icon>
+      </mat-chip>
+    </div>
+  </mat-card-footer>
+</mat-card>

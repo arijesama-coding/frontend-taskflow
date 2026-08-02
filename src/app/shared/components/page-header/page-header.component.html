@@ -1,0 +1,24 @@
+<div class="page-header">
+  <div class="header-content">
+    <div class="header-left">
+      <button
+        *ngIf="showBackButton"
+        mat-icon-button
+        (click)="onBack.emit()"
+        class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="header-text">
+        <h1 class="title">{{ title }}</h1>
+        <p *ngIf="subtitle" class="subtitle">{{ subtitle }}</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <ng-content select="[header-actions]"></ng-content>
+    </div>
+  </div>
+
+  <mat-divider *ngIf="showDivider"></mat-divider>
+</div>

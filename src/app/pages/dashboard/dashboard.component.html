@@ -1,0 +1,80 @@
+<div class="dashboard-page animate-fade-in-up">
+  <app-page-header
+    title="Dashboard"
+    subtitle="Overview of your projects and tasks">
+  </app-page-header>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <app-stats-card
+      label="Total Projects"
+      [value]="totalProjects"
+      icon="folder"
+      color="primary"
+      [trend]="12"
+      trendDirection="up">
+    </app-stats-card>
+
+    <app-stats-card
+      label="Total Tasks"
+      [value]="totalTasks"
+      icon="task_alt"
+      color="accent"
+      [trend]="8"
+      trendDirection="up">
+    </app-stats-card>
+
+    <app-stats-card
+      label="Completed Tasks"
+      [value]="completedTasks"
+      icon="check_circle"
+      color="success"
+      [progress]="completionRate">
+    </app-stats-card>
+
+    <app-stats-card
+      label="Overdue Tasks"
+      [value]="overdueTasks"
+      icon="warning"
+      color="warning"
+      [trend]="5"
+      trendDirection="down">
+    </app-stats-card>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <app-chart-widget
+      title="Tasks by Status"
+      [chartData]="statusChartData"
+      [chartLabels]="['To Do', 'In Progress', 'Review', 'Done']"
+      chartType="doughnut"
+      [colors]="['#757575', '#1565c0', '#f57c00', '#2e7d32']">
+    </app-chart-widget>
+
+    <app-chart-widget
+      title="Tasks by Priority"
+      [chartData]="priorityChartData"
+      [chartLabels]="['Low', 'Medium', 'High', 'Urgent']"
+      chartType="bar"
+      [colors]="['#757575', '#1565c0', '#f57c00', '#c62828']">
+    </app-chart-widget>
+  </div>
+
+  <!-- Recent Activity -->
+  <mat-card class="activity-card">
+    <mat-card-header>
+      <mat-card-title>Recent Activity</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let activity of recentActivities">
+          <mat-icon matListItemIcon>{{ activity.icon }}</mat-icon>
+          <div matListItemTitle>{{ activity.title }}</div>
+          <div matListItemLine>{{ activity.description }}</div>
+          <span matListItemMeta>{{ activity.time | date:'short' }}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

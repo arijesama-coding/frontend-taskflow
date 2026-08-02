@@ -1,0 +1,40 @@
+.page-header {
+  margin-bottom: var(--spacing-lg);
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) 0;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .back-button {
+    margin-right: var(--spacing-sm);
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: var(--spacing-xs) 0 0;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+}
