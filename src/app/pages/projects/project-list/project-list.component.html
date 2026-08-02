@@ -1,0 +1,87 @@
+<div class="projects-page animate-fade-in-up">
+  <app-page-header
+    title="Projects"
+    subtitle="Manage your projects and track progress"
+    [showBackButton]="false">
+    <div header-actions>
+      <button mat-raised-button color="primary" (click)="openCreateDialog()">
+        <mat-icon>add</mat-icon>
+        New Project
+      </button>
+    </div>
+  </app-page-header>
+
+  <!-- Filter Bar -->
+  <app-filter-bar
+    [filters]="projectFilters"
+    [activeFilters]="activeFilters"
+    [searchPlaceholder]="'Search projects...'"
+    (onSearch)="onSearch($event)"
+    (onFilterChange)="onFilterChange($event)">
+  </app-filter-bar>
+
+  <!-- Loading State -->
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+  <!-- Empty State -->
+  <app-empty-state
+    *ngIf="!loading && projects.length === 0"
+    icon="folder_open"
+    title="No projects found"
+    message="Create your first project to get started with task management."
+    actionLabel="Create Project"
+    actionIcon="add"
+    (onAction)="openCreateDialog()">
+  </app-empty-state>
+
+  <!-- Projects Grid -->
+  <div *ngIf="!loading && projects.length > 0" class="projects-grid">
+    <mat-card
+      *ngFor="let project of projects"
+      class="project-card"
+      (click)="viewProject(project.id)">
+      <mat-card-header>
+        <mat-card-title>{{ project.name }}</mat-card-title>
+        <mat-card-subtitle>
+          <app-status-badge
+            [status]="project.status"
+            type="project">
+          </app-status-badge>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="project-description">{{ project.description || 'No description' }}</p>
+
+        <div class="project-meta">
+              <span class="meta-item">
+                <mat-icon>task_alt</mat-icon>
+                {{ project.taskCount }} tasks
+              </span>
+          <span class="meta-item">
+                <mat-icon>calendar_today</mat-icon>
+            {{ project.createdDate | date }}
+              </span>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-icon-button (click)="$event.stopPropagation(); editProject(project)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="$event.stopPropagation(); deleteProject(project)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Pagination -->
+  <mat-paginator
+    *ngIf="totalItems > pageSize"
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[10, 20, 50]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</div>

@@ -1,0 +1,26 @@
+.dashboard-page {
+  padding: var(--spacing-lg);
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .activity-card {
+    margin-top: var(--spacing-lg);
+
+    mat-list-item {
+      height: auto;
+      padding: var(--spacing-md) 0;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.task-card {
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border-left: 3px solid transparent;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.low { border-left-color: #757575; }
+  &.medium { border-left-color: #1565c0; }
+  &.high { border-left-color: #f57c00; }
+  &.urgent { border-left-color: #c62828; }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+
+    .card-actions {
+      display: flex;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+  }
+
+  &:hover .card-actions {
+    opacity: 1;
+  }
+
+  .task-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 var(--spacing-xs);
+    padding: 0 var(--spacing-md);
+  }
+
+  .task-description {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+    padding: 0 var(--spacing-md);
+    line-height: 1.4;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+
+    .task-meta {
+      display: flex;
+      gap: var(--spacing-md);
+
+      .deadline, .assignee {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        color: var(--text-secondary);
+
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+        }
+
+        &.overdue {
+          color: var(--warn-color);
+        }
+      }
+    }
+
+    .drag-handle {
+      cursor: grab;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        color: var(--text-disabled);
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="filter-bar">
+  <app-search-input
+    (onSearchChange)="onSearch.emit($event)"
+    [placeholder]="searchPlaceholder">
+  </app-search-input>
+
+  <div class="filter-actions">
+    <button
+      mat-stroked-button
+      [matMenuTriggerFor]="filterMenu"
+      *ngIf="filters.length > 0">
+      <mat-icon>filter_list</mat-icon>
+      Filters
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #filterMenu="matMenu">
+      <div *ngFor="let filter of filters" class="filter-group">
+        <label class="filter-label">{{ filter.label }}</label>
+        <mat-chip-listbox>
+          <mat-chip-option
+            *ngFor="let option of filter.options"
+            [selected]="isFilterActive(filter.key, option.value)"
+            (selectionChange)="onFilterChange.emit({
+                  key: filter.key,
+                  value: option.value
+                })">
+            {{ option.label }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+    </mat-menu>
+
+    <ng-content select="[filter-actions]"></ng-content>
+  </div>
+</div>
